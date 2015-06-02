@@ -6,16 +6,17 @@ export default class MessageStore extends BaseStore {
     }
     static get handlers() {
         return {
-            'MESSAGE_ACTION': 'fooHandler'
+            'MESSAGE_ACTION': 'handleMessage'
         };
     }
 
-    initialize() { // Set the initial state
+    initialize() {
         this._message = null;
     }
 
-    fooHandler(payload) {
+    handleMessage(payload) {
         this._message = payload;
+        this.emitChange();
     }
 
     get message() {
