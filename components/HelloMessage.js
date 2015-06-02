@@ -3,6 +3,7 @@ import {connectToStores, provideContext} from 'fluxible/addons';
 import MessageStore from '../stores/MessageStore';
 import action from '../actions/messageAction';
 import MessageDisplay from './MessageDisplay';
+import ResetButton from './ResetButton';
 
 class HelloMessage extends React.Component {
     static get contextTypes() {
@@ -36,9 +37,7 @@ class HelloMessage extends React.Component {
                        onChange={this.updateModel.bind(this)}
                        value={this.props.greeting}/>
                 <MessageDisplay message={this.props.greeting + ', World'}/>
-                <button
-                    onClick={this.reset.bind(this)}>Clear
-                </button>
+                <ResetButton resetHandler={this.reset.bind(this)} />
             </div>);
     }
 }
