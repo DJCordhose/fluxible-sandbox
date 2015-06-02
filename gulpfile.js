@@ -22,5 +22,7 @@ gulp.task('nodemon:app', ['clean'], function () {
 
 gulp.task('webpack:dev', ['clean'], function() {
     gulp.src(path.resolve(webpackConfigPath))
-        .pipe(webpack.run());
+        .on('error', gutil.log)
+        .pipe(webpack.run())
+        .on('error', gutil.log);
 });

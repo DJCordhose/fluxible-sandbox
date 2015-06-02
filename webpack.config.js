@@ -1,6 +1,6 @@
 module.exports = {
     resolve: {
-        extensions: ['', '.js']
+        extensions: ['', '.js', '.jsx']
     },
     entry: './client.js',
     output: {

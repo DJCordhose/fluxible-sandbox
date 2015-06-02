@@ -1,47 +1,32 @@
+// Derived from example at
+// https://github.com/yahoo/fluxible
+
 import Fluxible from 'fluxible';
 import React from 'react';
-import {connectToStores, createStore, provideContext} from 'fluxible/addons';
+import {connectToStores, provideContext} from 'fluxible/addons';
 
-const ACTION_NAME = 'MESSAGE_ACTION';
+import HelloMessage from './components/HelloMessage';
+import Html from './components/Html';
 
-// Action
-const action = (actionContext, payload) => {
-    actionContext.dispatch(ACTION_NAME, payload);
-};
+import MessageStore from './stores/MessageStore';
 
-// Store
-const MessageStore = createStore({
-    storeName: 'MessageStore',
-    handlers: {
-        [ACTION_NAME]: 'fooHandler'
-    },
-    initialize() { // Set the initial state
-        this.message = null;
-    },
-    fooHandler(payload) {
-        this.message = payload;
-    },
-    getState() {
-        return {
-            message: this.message
-        };
-    }
-});
+import action from './actions/messageAction';
 
-// Component
-class App extends React.Component {
-    render() {
-        return <span>{this.props.message}</span>;
-    }
-}
+//class App extends React.Component {
+//    render() {
+//        const content = <HelloMessage greeting={this.props.message} />;
+//        //const state = null; // TODO
+//        //return <Html markup={content} state={state}/>;
+//        return content;
+//    }
+//}
 
-App = provideContext(connectToStores(App, [MessageStore], (stores, props) => {
-    return stores.MessageStore.getState();
-}));
-
-// App
 const app = new Fluxible({
-    component: App,
+    component: provideContext(connectToStores(HelloMessage, [MessageStore], (stores, props) => {
+        return {
+            greeting: stores.MessageStore.message
+        };
+    })),
     stores: [MessageStore]
 });
 
