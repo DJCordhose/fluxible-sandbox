@@ -3,7 +3,7 @@ import React from 'react';
 
 import HelloMessage from './components/HelloMessage';
 import MessageStore from './stores/MessageStore';
-import action from './actions/messageAction';
+import messageAction from './actions/messageAction';
 
 const app = new Fluxible({
     component: HelloMessage,
@@ -13,6 +13,6 @@ const app = new Fluxible({
 const context = app.createContext();
 const mountNode = document.getElementById('example');
 const defaultGreeting = 'Hello';
-context.executeAction(action, defaultGreeting, err => {
+context.executeAction(messageAction, defaultGreeting, err => {
     React.render(context.createElement(), mountNode);
 });

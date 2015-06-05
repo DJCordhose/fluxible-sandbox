@@ -1,7 +1,7 @@
 import React from 'react';
 import {connectToStores, provideContext} from 'fluxible/addons';
 import MessageStore from '../stores/MessageStore';
-import action from '../actions/messageAction';
+import messageAction from '../actions/messageAction';
 import MessageDisplay from './MessageDisplay';
 import ResetButton from './ResetButton';
 
@@ -27,7 +27,7 @@ class HelloMessage extends React.Component {
     }
 
     _sendGreeting(greeting) {
-        this.context.executeAction(action, greeting);
+        this.context.executeAction(messageAction, greeting);
     }
 
     render() {
